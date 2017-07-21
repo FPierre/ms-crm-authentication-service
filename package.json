@@ -4,6 +4,9 @@
   "main": "src/authentication-service.js",
   "license": "MIT",
   "scripts": {
-    "start": "node ./src/authentication-service.js",
+    "start": "node ./src/authentication-service.js"
+  },
+  "dependencies": {
+    "cote": "^0.15.1"
   }
 }
