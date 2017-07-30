@@ -11,16 +11,22 @@ app.use(bodyParser.json())
 app.use(cors())
 app.use(cookieParser())
 
-const jwtSecret = 'toto'
-
 app.post('/signIn', (req, res, next) => {
   console.log('signIn', req.body.email)
 
-  const token = jwt.sign({ email: req.body.email }, jwtSecret, { expiresIn: 60 * 5 })
+  const token = jwt.sign(
+    { email: req.body.email },
+    process.env.JWT_SECRET,
+    { expiresIn: 60 * 5 }
+  )
 
   res.send({ token })
 })
 
-app.listen(4001, () => {
-  console.log('listen 4001')
-})
+module.exports = {
+  start: () => {
+    app.listen(process.env.SIGN_IN_APP_PORT, () => {
+      console.log(`listen ${process.env.SIGN_IN_APP_PORT}`)
+    })
+  }
+}
